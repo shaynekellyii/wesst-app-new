@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.skelly.mywesst.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /* https://developer.android.com/samples/RecyclerView/src/com.example.android.recyclerview/
@@ -21,15 +22,16 @@ public class StreamFragment extends Fragment {
     private static final String TAG = "StreamFragment";
 
     protected RecyclerView mRecyclerView;
-    protected StreamAdapter mAdapter;
+    protected static StreamAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected List<Post> mPostList;
+    protected static List<Post> mPostList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPostList = StreamData.getPostList();
+        mPostList = new ArrayList<>();
+        StreamData.getPostList();
     }
 
     @Override
@@ -44,9 +46,15 @@ public class StreamFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new StreamAdapter(getActivity(), mPostList);
+        mAdapter = new StreamAdapter(mPostList);
         mRecyclerView.setAdapter(mAdapter);
 
         return rootView;
+    }
+
+    public static void onPostLoad(List<Post> posts) {
+        List<Post> newPostList = posts;
+        mPostList.addAll(newPostList);
+        mAdapter.notifyDataSetChanged();
     }
 }

@@ -1,6 +1,5 @@
 package com.skelly.mywesst.stream;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import java.util.List;
 public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.ViewHolder> {
 
     private List<Post> mDataSet;
-    private Activity mActivityContext;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         protected TextView mAuthor;
@@ -39,9 +37,8 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.ViewHolder
         }
     }
 
-    public StreamAdapter(Activity context, List<Post> posts) {
+    public StreamAdapter(List<Post> posts) {
         mDataSet = posts;
-        mActivityContext = context;
     }
 
     // Create new views (invoked by the LayoutManager)
@@ -57,12 +54,10 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mAuthor.setText(mDataSet.get(position).getAuthor());
-        holder.mOrg.setText(mDataSet.get(position).getOrganization());
-        holder.mContent.setText(mDataSet.get(position).getContent());
-        holder.mTime.setText(mDataSet.get(position).getTime());
+        // TODO: Change username to full name, force user to add full name when signing up
+        holder.mAuthor.setText(mDataSet.get(position).getUsername());
 
-        Picasso.with(mActivityContext).load("http://i.imgur.com/DvpvklR.png")
+        Picasso.with(holder.mImage.getContext()).load("http://i.imgur.com/DvpvklR.png")
                 .into(holder.mImage);
         holder.mImage.setVisibility(View.VISIBLE);
     }

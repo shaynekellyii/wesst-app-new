@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyWESST</string>
+    <string name="app_name">Engage</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -31,4 +31,8 @@
     <string name="conferences">Conferences</string>
     <string name="activity_feed">Activity feed</string>
     <string name="events">Events</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="signup">Sign up</string>
+    <string name="login">Login</string>
 </resources>
